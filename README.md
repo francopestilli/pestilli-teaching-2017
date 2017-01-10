@@ -4,6 +4,7 @@ Indiana University, Bloomington, Indiana
 
 ### Class websites 
 https://iu.instructure.com/courses/1607749
+
 https://www.github.com/francopestilli/pestilli-teaching-2017
 
 ### Time and location
