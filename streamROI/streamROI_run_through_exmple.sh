@@ -25,6 +25,7 @@ COMMENT
 PYTHONBIN=/gpfs/home/j/f/jfaskowi/Karst/anaconda2/bin/python2.7
 export PARENTWORKINGDIR=${PWD}/run_through_it/
 mkdir -p ${PARENTWORKINGDIR}
+cd ${PARENTWORKINGDIR} || { echo "couldnt cd into working dir, perhaps it couldnt be made? Exiting"; exit 1; }
 
 # will output the commands of the script into notes file
 OUT=${PARENTWORKINGDIR}notes.txt
