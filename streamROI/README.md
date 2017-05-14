@@ -4,9 +4,9 @@ By [Josh Faskowitz](https://github.com/faskowit)
 
 ## Description
 
-Final project created for P657 'The New Digital Neuroanatomy' during Spring 2017 semester at Indiana University Bloomington, Department of Psychological and Brain Sciences. This project outlines a method for using streamline tractography as a means to delimit microstructure regions of interest. We then measure geometric similarity of these ROIs by making a second-order isomorphism comparison (in similar spirit to representation similarity analysis). 
+Final project created for P657 'The New Digital Neuroanatomy' during Spring 2017 semester at Indiana University Bloomington, Department of Psychological and Brain Sciences. This project outlines a method for using streamline tractography as a means to delimit microstructure maps to specific regions of interest. We then measure geometric similarity of these ROIs (streamROIs) by making a second-order isomorphism comparison (in similar spirit to representational similarity analysis). 
 
-To run an example of this project, check out the `streamROI_run_through_exmple.sh` script. Make sure to alter the script to set `PYTHONBIN` to python executable (tested with python 2.7) and `PARENTWORKINGDIR` to desired output directory. This project relys on having [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/), [ANTs](https://github.com/stnava/ANTs), and [Dipy](http://nipy.org/dipy/) setup in your computing environment. 
+To run an example of this project, check out the `streamROI_run_through_exmple.sh` script. Make sure to alter the script to set `PYTHONBIN` to python executable (tested with python 2.7) and `PARENTWORKINGDIR` to desired output directory. This project relies on having [FSL](https://fsl.fmrib.ox.ac.uk/fsl/fslwiki/), [ANTs](https://github.com/stnava/ANTs), and [Dipy](https://github.com/nipy/dipy) setup in your computing environment. 
 
 ## Abstract
 
