@@ -11,16 +11,15 @@ import h5py
 __author__ = 'jfaskowitz'
 
 """
-
-Josh Faskowitz
+josh faskowitz
 Indiana University
+Computational Cognitive Neurosciene Lab
 
-built on top of scripts written at
-Imaging Genetics Center,
 University of Southern California
+Imaging Genetics Center
 
-inspiration taken from the dipy website
-
+Copyright (c) 2017 Josh Faskowitz
+See LICENSE file for license
 """
 
 np.seterr(all='ignore')
