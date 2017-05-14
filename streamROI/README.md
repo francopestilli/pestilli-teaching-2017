@@ -1,4 +1,4 @@
-## SteamROI Project
+## StreamROI Final Project
 
 By [Josh Faskowitz](https://github.com/faskowit)
 
