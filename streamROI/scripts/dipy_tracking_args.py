@@ -4,13 +4,15 @@ import argparse
 __author__ = 'jfaskowitz'
 
 """
-
 josh faskowitz
 Indiana University
+Computational Cognitive Neurosciene Lab
+
 University of Southern California
+Imaging Genetics Center
 
-inspiration taken from the dipy website
-
+Copyright (c) 2017 Josh Faskowitz
+See LICENSE file for license
 """
 
 def isfloat(value):
