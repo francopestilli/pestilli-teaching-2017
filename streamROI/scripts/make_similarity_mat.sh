@@ -1,7 +1,22 @@
 #!/bin/bash
 
+<<'COMMENT'
+josh faskowitz
+Indiana University
+Computational Cognitive Neurosciene Lab
+
+University of Southern California
+Imaging Genetics Center
+
+Copyright (c) 2017 Josh Faskowitz
+See LICENSE file for license
+COMMENT
+
+# the PARENTWORKINGDIR variabe is exported from script calling
+# this script
 workingDir=${PARENTWORKINGDIR}/similarity_mats/
 
+# read in data here
 inputDir=$1
 microStructMap=$2
 labelLow=$3
@@ -16,6 +31,7 @@ mkdir -p $workingDir
 cd $workingDir
 echo "CHANGING DIRECTORY into $workingDir"
 
+# let's write out what script does into notes file
 OUT=notes.txt
 > $OUT
 
@@ -37,11 +53,16 @@ do
     fi
 
     # lets normalize better
+    # read the 95% and 5% percentile values
     robMax=$(${FSLDIR}/bin/fslstats ${tmp_dens} -P 95)
     robMin=$(${FSLDIR}/bin/fslstats ${tmp_dens} -P 5)
 
+    # get difference between these high + low vals
     divBy=$(echo "${robMax} - ${robMin}" | bc)
 
+    # bring down values higher than 95% percentile value 
+    # to the 95% value. subtract min value and normalize 
+    # from 0-1
     cmd="${FSLDIR}/bin/fslmaths \
             ${tmp_dens} -min ${robMax} \
             -sub ${robMin} -thr 0 \
@@ -64,7 +85,8 @@ do
 
 done
 
-#MeasureImageSimilarity ImageDimension whichmetric image1.ext image2.ext {logfile} {outimage.ext}  {target-value}   {epsilon-tolerance}
+# the ANTs command
+# MeasureImageSimilarity ImageDimension whichmetric image1.ext image2.ext {logfile} {outimage.ext}  {target-value}   {epsilon-tolerance}
 # outimage (Not Implemented for MI yet)  and logfile are optional  
 # target-value and epsilon-tolerance set goals for the metric value -- if the metric value is within epsilon-tolerance of the target-value, then the test succeeds  Metric 0 - MeanSquareDifference, 1 - Cross-Correlation, 2-Mutual Information , 3-SMI 
 
@@ -202,7 +224,7 @@ do
 done
 
 # optional cleanup
-# ls ${workingDir}/tmpNorm*.nii.gz && rm ${workingDir}/tmpNorm*.nii.gz
+ls ${workingDir}/tmpNorm*.nii.gz && rm ${workingDir}/tmpNorm*.nii.gz
 
 ###########################################################
 ###########################################################
