@@ -1,5 +1,15 @@
 #!/bin/bash
 
+<<'COMMENT'
+josh faskowitz
+Indiana University
+Computational Cognitive Neurosciene Lab
+University of Southern California
+Imaging Genetics Center
+Copyright (c) 2017 Josh Faskowitz
+See LICENSE file for license
+COMMENT
+
 # must setup FSL up here
 # FSLDIR=
 # source ${FSLDIR}/etc/fslconf/fsl.sh
@@ -16,6 +26,7 @@ PYTHONBIN=/gpfs/home/j/f/jfaskowi/Karst/anaconda2/bin/python2.7
 export PARENTWORKINGDIR=${PWD}/run_through_it/
 mkdir -p ${PARENTWORKINGDIR}
 
+# will output the commands of the script into notes file
 OUT=${PARENTWORKINGDIR}notes.txt
 > $OUT
 
@@ -28,6 +39,8 @@ start=`date +%s`
 
 mkdir -p ${PARENTWORKINGDIR}/example_data/
 
+# based on the load_stanford_hardi script, these will be the names of
+# the example data files
 dwiImg=${PARENTWORKINGDIR}/example_data/stanfordHardi_dwi.nii.gz
 labelsImg=${PARENTWORKINGDIR}/example_data/stanfordHardi_fsLabels.nii.gz
 bvals=${PARENTWORKINGDIR}/example_data/stanfordHardi.bvals
@@ -45,7 +58,7 @@ eval $cmd #execute the command
 #######################################################################
 #######################################################################
 #######################################################################
-# real quick make a mask
+# real quick make a mask with FSL
 
 cmd="${FSLDIR}/bin/bet2 \
         ${dwiImg} \
@@ -65,7 +78,9 @@ maskImg=${PARENTWORKINGDIR}/example_data/stanfordHardi_mask.nii.gz
 #######################################################################
 # run a microstrucute model of your choosing
 # lets do csa GFA here
-# its not 
+# its not actually a biophysical model of WM microstructure, but we use
+# it here as a proof-of-concept. One could inset a different microstructure
+# map and use it in place of where 'gfaImg' variable is used. 
 
 mkdir -p ${PARENTWORKINGDIR}/fit_microstruct/
 gfaOutput=${PARENTWORKINGDIR}/fit_microstruct/stanfordHardi
@@ -95,6 +110,7 @@ gfaImg=${gfaOutput}_gfa_csa_sh6.nii.gz
 #######################################################################
 # lets prep for tracking a little bit
 
+# let's extract the white matter labels from the example data
 cmd="${FSLDIR}/bin/fslmaths \
         ${labelImg} \
         -thr 1 -uthr 2 \
@@ -107,7 +123,8 @@ eval $cmd #execute the command
 
 wmImg=${PARENTWORKINGDIR}/example_data/stanfordHardi_wm.nii.gz 
 
-# threshold the mask to get rid of white matter
+# threshold the mask to get rid of white matter, so we can use it as the
+# label mask to record connectivity from
 cmd="${FSLDIR}/bin/fslmaths \
         ${labelImg} \
         -thr 3 \
@@ -117,6 +134,7 @@ echo $cmd #state the command
 echo $cmd >> $OUT
 eval $cmd #execute the command
 
+# get the high/low from the label file, to send to similarity mat script
 cmd="${FSLDIR}/bin/fslstats \
         ${labelImg} \
         -l 0 -R \
@@ -127,6 +145,7 @@ labelHigh=$(eval $cmd | awk '{print $2}')
 #######################################################################
 #######################################################################
 #######################################################################
+# do some tractography
 
 mkdir -p ${PARENTWORKINGDIR}/tractography/
 trackOutput=${PARENTWORKINGDIR}/tractography/stanfordHardi
@@ -174,6 +193,7 @@ eval $cmd #execute the command
 #######################################################################
 #######################################################################
 #######################################################################
+# make the similarity matrices!
 
 #inputDir=$1
 #microStructMap=$2
