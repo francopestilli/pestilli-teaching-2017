@@ -8,20 +8,17 @@ from dipy_tracking_args import *
 
 __author__ = 'jfaskowitz'
 
-"""
-
+'''
 josh faskowitz
-
-Computational Cognitive Neuroscience Lab
 Indiana University
+Computational Cognitive Neurosciene Lab
 
-Imaging Genetics Center
 University of Southern California
+Imaging Genetics Center
 
-inspiration taken from the dipy website
-
-"""
-
+Copyright (c) 2017 Josh Faskowitz
+See LICENSE file for license
+'''
 
 def isfloat(value):
     try:
